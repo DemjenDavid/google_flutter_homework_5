@@ -37,13 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       ready = false;
     });
-    Response r = await get(
-        Uri.parse("https://api.unsplash.com/photos/random/?count=9"),
-        headers: <String, String>{
-          "Authorization":
-              "Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg",
-          "count": "9"
-        });
+    Response r = await get(Uri.parse("https://api.unsplash.com/photos/random/?count=9"), headers: <String, String>{
+      "Authorization": "Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg",
+      "count": "9"
+    });
     if (r.statusCode == 200) {
       urls.clear();
       List<dynamic> data = jsonDecode(r.body) as List<dynamic>;
@@ -76,14 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
           return CustomScrollView(
             slivers: <Widget>[
               SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+                delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
                   return Container(
                     height: MediaQuery.of(context).size.height,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(urls[index]),
-                            fit: BoxFit.cover)),
+                    decoration:
+                        BoxDecoration(image: DecorationImage(image: NetworkImage(urls[index]), fit: BoxFit.cover)),
                   );
                 }, childCount: urls.length),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
