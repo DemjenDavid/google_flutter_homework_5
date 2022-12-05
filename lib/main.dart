@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -35,23 +33,28 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> urls = <String>[];
   bool ready = false;
 
-    Future<void> _update() async{
-      setState(() {ready = false;});
-      Response r = await get(Uri.parse("https://api.unsplash.com/photos/random/?count=9"),
-          headers: {
-            "Authorization":"Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg",
-            "count":"9"
-          }
-      );
-      if(r.statusCode == 200) {
-        urls.clear();
-        List<dynamic> data = jsonDecode(r.body) as List<dynamic>;
-        for (Map<String, dynamic> item in data) {
-          urls.add(item["urls"]["regular"]);
-        }
+  Future<void> _update() async {
+    setState(() {
+      ready = false;
+    });
+    Response r = await get(
+        Uri.parse("https://api.unsplash.com/photos/random/?count=9"),
+        headers: <String, String>{
+          "Authorization":
+              "Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg",
+          "count": "9"
+        });
+    if (r.statusCode == 200) {
+      urls.clear();
+      List<dynamic> data = jsonDecode(r.body) as List<dynamic>;
+      for (Map<String, dynamic> item in data) {
+        urls.add(item["urls"]["regular"]);
       }
-      setState(() {ready = true;});
     }
+    setState(() {
+      ready = true;
+    });
+  }
 
   @override
   void initState() {
@@ -62,52 +65,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    return
-        Container(
-          child: RefreshIndicator(
-            onRefresh: _update,
-            child: Builder(
-              builder: (context) {
-                if(!ready){
-                  return Center(
-                    child: const CircularProgressIndicator(
-                    ),
+    return RefreshIndicator(
+      onRefresh: _update,
+      child: Builder(builder: (BuildContext context) {
+        if (!ready) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return CustomScrollView(
+            slivers: <Widget>[
+              SliverGrid(
+                delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(urls[index]),
+                            fit: BoxFit.cover)),
                   );
-                }
-                else{
-                  return CustomScrollView(
-
-                    slivers:[
-                      SliverGrid(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index){
-                                return Container(
-                                    height: MediaQuery.of(context).size.height,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(image: NetworkImage(urls[index]),
-                                      fit: BoxFit.cover
-                                      )
-                                    ),
-                                );
-                              },
-                              childCount: urls.length
-                            ),
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 8.0,
-                              mainAxisSpacing: 8.0,
-                            ),
-
-                        ),
-
-                    ],
-                  );
-                }
-
-              }
-            ),
-          ),
-        );
+                }, childCount: urls.length),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                ),
+              ),
+            ],
+          );
+        }
+      }),
+    );
   }
 }
