@@ -32,20 +32,22 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<String> urls = <String>[];
   bool ready = false;
+  final ScrollController _controller = ScrollController();
 
   Future<void> _update() async {
     setState(() {
       ready = false;
     });
-    Response r = await get(Uri.parse("https://api.unsplash.com/photos/random/?count=9"), headers: <String, String>{
-      "Authorization": "Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg",
-      "count": "9"
-    });
-    if (r.statusCode == 200) {
-      urls.clear();
-      List<dynamic> data = jsonDecode(r.body) as List<dynamic>;
-      for (Map<String, dynamic> item in data) {
-        urls.add(item["urls"]["regular"]);
+    for (int i = 0; i < 2; i++) {
+      Response r = await get(Uri.parse("https://api.unsplash.com/photos/random/?count=30"), headers: <String, String>{
+        "Authorization": "Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg",
+        "count": "30"
+      });
+      if (r.statusCode == 200) {
+        List<dynamic> data = jsonDecode(r.body) as List<dynamic>;
+        for (Map<String, dynamic> item in data) {
+          urls.add(item["urls"]["regular"]);
+        }
       }
     }
     setState(() {
@@ -53,11 +55,26 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _onScroll() {
+    final double offset = _controller.offset;
+    final double maxScrollExtent = _controller.position.maxScrollExtent;
+    if (offset > (maxScrollExtent - MediaQuery.of(context).size.height) && ready) {
+      print("update");
+      _update();
+    }
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _update();
+    _controller.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -71,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         } else {
           return CustomScrollView(
+            controller: _controller,
             slivers: <Widget>[
               SliverGrid(
                 delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
