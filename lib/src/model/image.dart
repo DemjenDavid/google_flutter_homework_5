@@ -8,7 +8,7 @@ class Image with _$Image {
   const factory Image(
       {required String? description,
       required num likes,
-      @JsonKey(name: "created_at") required String date,
+      @JsonKey(name: 'created_at') required String date,
       @JsonKey(name: "urls") required Urls url,
       @JsonKey(name: "user") required User user}) = Image$;
 
