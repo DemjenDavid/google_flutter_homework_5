@@ -5,12 +5,13 @@ part 'image.g.dart';
 
 @freezed
 class Image with _$Image {
-  const factory Image(
-      {required String? description,
-      required num likes,
-      @JsonKey(name: 'created_at') required String date,
-      @JsonKey(name: 'urls') required Urls url,
-      @JsonKey(name: 'user') required User user,}) = Image$;
+  const factory Image({
+    required String? description,
+    required num likes,
+    @JsonKey(name: 'created_at') required String date,
+    @JsonKey(name: 'urls') required Urls url,
+    @JsonKey(name: 'user') required User user,
+  }) = Image$;
 
   factory Image.fromJson(Map<dynamic, dynamic> json) => _$ImageFromJson(Map<String, dynamic>.from(json));
 }

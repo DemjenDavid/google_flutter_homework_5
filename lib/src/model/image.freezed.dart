@@ -36,8 +36,7 @@ mixin _$Image {
 
 /// @nodoc
 abstract class $ImageCopyWith<$Res> {
-  factory $ImageCopyWith(Image value, $Res Function(Image) then) =
-      _$ImageCopyWithImpl<$Res, Image>;
+  factory $ImageCopyWith(Image value, $Res Function(Image) then) = _$ImageCopyWithImpl<$Res, Image>;
   @useResult
   $Res call(
       {String? description,
@@ -51,8 +50,7 @@ abstract class $ImageCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ImageCopyWithImpl<$Res, $Val extends Image>
-    implements $ImageCopyWith<$Res> {
+class _$ImageCopyWithImpl<$Res, $Val extends Image> implements $ImageCopyWith<$Res> {
   _$ImageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -112,8 +110,7 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
 
 /// @nodoc
 abstract class _$$Image$CopyWith<$Res> implements $ImageCopyWith<$Res> {
-  factory _$$Image$CopyWith(_$Image$ value, $Res Function(_$Image$) then) =
-      __$$Image$CopyWithImpl<$Res>;
+  factory _$$Image$CopyWith(_$Image$ value, $Res Function(_$Image$) then) = __$$Image$CopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -130,10 +127,8 @@ abstract class _$$Image$CopyWith<$Res> implements $ImageCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$Image$CopyWithImpl<$Res> extends _$ImageCopyWithImpl<$Res, _$Image$>
-    implements _$$Image$CopyWith<$Res> {
-  __$$Image$CopyWithImpl(_$Image$ _value, $Res Function(_$Image$) _then)
-      : super(_value, _then);
+class __$$Image$CopyWithImpl<$Res> extends _$ImageCopyWithImpl<$Res, _$Image$> implements _$$Image$CopyWith<$Res> {
+  __$$Image$CopyWithImpl(_$Image$ _value, $Res Function(_$Image$) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -179,8 +174,7 @@ class _$Image$ implements Image$ {
       @JsonKey(name: 'urls') required this.url,
       @JsonKey(name: 'user') required this.user});
 
-  factory _$Image$.fromJson(Map<String, dynamic> json) =>
-      _$$Image$FromJson(json);
+  factory _$Image$.fromJson(Map<String, dynamic> json) => _$$Image$FromJson(json);
 
   @override
   final String? description;
@@ -206,8 +200,7 @@ class _$Image$ implements Image$ {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Image$ &&
-            (identical(other.description, description) ||
-                other.description == description) &&
+            (identical(other.description, description) || other.description == description) &&
             (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.url, url) || other.url == url) &&
@@ -216,14 +209,12 @@ class _$Image$ implements Image$ {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, description, likes, date, url, user);
+  int get hashCode => Object.hash(runtimeType, description, likes, date, url, user);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$Image$CopyWith<_$Image$> get copyWith =>
-      __$$Image$CopyWithImpl<_$Image$>(this, _$identity);
+  _$$Image$CopyWith<_$Image$> get copyWith => __$$Image$CopyWithImpl<_$Image$>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -258,8 +249,7 @@ abstract class Image$ implements Image {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$Image$CopyWith<_$Image$> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$Image$CopyWith<_$Image$> get copyWith => throw _privateConstructorUsedError;
 }
 
 Urls _$UrlsFromJson(Map<String, dynamic> json) {
@@ -278,15 +268,13 @@ mixin _$Urls {
 
 /// @nodoc
 abstract class $UrlsCopyWith<$Res> {
-  factory $UrlsCopyWith(Urls value, $Res Function(Urls) then) =
-      _$UrlsCopyWithImpl<$Res, Urls>;
+  factory $UrlsCopyWith(Urls value, $Res Function(Urls) then) = _$UrlsCopyWithImpl<$Res, Urls>;
   @useResult
   $Res call({String full, String regular});
 }
 
 /// @nodoc
-class _$UrlsCopyWithImpl<$Res, $Val extends Urls>
-    implements $UrlsCopyWith<$Res> {
+class _$UrlsCopyWithImpl<$Res, $Val extends Urls> implements $UrlsCopyWith<$Res> {
   _$UrlsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -315,18 +303,15 @@ class _$UrlsCopyWithImpl<$Res, $Val extends Urls>
 
 /// @nodoc
 abstract class _$$Urls$CopyWith<$Res> implements $UrlsCopyWith<$Res> {
-  factory _$$Urls$CopyWith(_$Urls$ value, $Res Function(_$Urls$) then) =
-      __$$Urls$CopyWithImpl<$Res>;
+  factory _$$Urls$CopyWith(_$Urls$ value, $Res Function(_$Urls$) then) = __$$Urls$CopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String full, String regular});
 }
 
 /// @nodoc
-class __$$Urls$CopyWithImpl<$Res> extends _$UrlsCopyWithImpl<$Res, _$Urls$>
-    implements _$$Urls$CopyWith<$Res> {
-  __$$Urls$CopyWithImpl(_$Urls$ _value, $Res Function(_$Urls$) _then)
-      : super(_value, _then);
+class __$$Urls$CopyWithImpl<$Res> extends _$UrlsCopyWithImpl<$Res, _$Urls$> implements _$$Urls$CopyWith<$Res> {
+  __$$Urls$CopyWithImpl(_$Urls$ _value, $Res Function(_$Urls$) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -380,8 +365,7 @@ class _$Urls$ implements Urls$ {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$Urls$CopyWith<_$Urls$> get copyWith =>
-      __$$Urls$CopyWithImpl<_$Urls$>(this, _$identity);
+  _$$Urls$CopyWith<_$Urls$> get copyWith => __$$Urls$CopyWithImpl<_$Urls$>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -392,8 +376,7 @@ class _$Urls$ implements Urls$ {
 }
 
 abstract class Urls$ implements Urls {
-  const factory Urls$(
-      {required final String full, required final String regular}) = _$Urls$;
+  const factory Urls$({required final String full, required final String regular}) = _$Urls$;
 
   factory Urls$.fromJson(Map<String, dynamic> json) = _$Urls$.fromJson;
 
@@ -425,19 +408,14 @@ mixin _$User {
 
 /// @nodoc
 abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+  factory $UserCopyWith(User value, $Res Function(User) then) = _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String? username,
-      String? name,
-      String? bio,
-      @JsonKey(name: 'instagram_username') String? instagramUsername});
+      {String? username, String? name, String? bio, @JsonKey(name: 'instagram_username') String? instagramUsername});
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
+class _$UserCopyWithImpl<$Res, $Val extends User> implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -476,22 +454,16 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 
 /// @nodoc
 abstract class _$$User$CopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$User$CopyWith(_$User$ value, $Res Function(_$User$) then) =
-      __$$User$CopyWithImpl<$Res>;
+  factory _$$User$CopyWith(_$User$ value, $Res Function(_$User$) then) = __$$User$CopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String? username,
-      String? name,
-      String? bio,
-      @JsonKey(name: 'instagram_username') String? instagramUsername});
+      {String? username, String? name, String? bio, @JsonKey(name: 'instagram_username') String? instagramUsername});
 }
 
 /// @nodoc
-class __$$User$CopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$User$>
-    implements _$$User$CopyWith<$Res> {
-  __$$User$CopyWithImpl(_$User$ _value, $Res Function(_$User$) _then)
-      : super(_value, _then);
+class __$$User$CopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$User$> implements _$$User$CopyWith<$Res> {
+  __$$User$CopyWithImpl(_$User$ _value, $Res Function(_$User$) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -553,24 +525,20 @@ class _$User$ implements User$ {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$User$ &&
-            (identical(other.username, username) ||
-                other.username == username) &&
+            (identical(other.username, username) || other.username == username) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.bio, bio) || other.bio == bio) &&
-            (identical(other.instagramUsername, instagramUsername) ||
-                other.instagramUsername == instagramUsername));
+            (identical(other.instagramUsername, instagramUsername) || other.instagramUsername == instagramUsername));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, username, name, bio, instagramUsername);
+  int get hashCode => Object.hash(runtimeType, username, name, bio, instagramUsername);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$User$CopyWith<_$User$> get copyWith =>
-      __$$User$CopyWithImpl<_$User$>(this, _$identity);
+  _$$User$CopyWith<_$User$> get copyWith => __$$User$CopyWithImpl<_$User$>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -585,8 +553,7 @@ abstract class User$ implements User {
       {required final String? username,
       required final String? name,
       required final String? bio,
-      @JsonKey(name: 'instagram_username')
-          required final String? instagramUsername}) = _$User$;
+      @JsonKey(name: 'instagram_username') required final String? instagramUsername}) = _$User$;
 
   factory User$.fromJson(Map<String, dynamic> json) = _$User$.fromJson;
 

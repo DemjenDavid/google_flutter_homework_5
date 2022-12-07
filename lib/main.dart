@@ -66,38 +66,44 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _update,
-      child: Builder(builder: (BuildContext context) {
-        if (!ready) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return CustomScrollView(
-            slivers: <Widget>[
-              SliverGrid(
-                delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                  final cstm.Image image = images[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/imageDetail', arguments: image);
+      child: Builder(
+        builder: (BuildContext context) {
+          if (!ready) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return CustomScrollView(
+              slivers: <Widget>[
+                SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      final cstm.Image image = images[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/imageDetail', arguments: image);
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: NetworkImage(image.url.regular), fit: BoxFit.cover),
+                          ),
+                        ),
+                      );
                     },
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(image: NetworkImage(image.url.regular), fit: BoxFit.cover),),
-                    ),
-                  );
-                }, childCount: images.length,),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+                    childCount: images.length,
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                  ),
                 ),
-              ),
-            ],
-          );
-        }
-      },),
+              ],
+            );
+          }
+        },
+      ),
     );
   }
 }
