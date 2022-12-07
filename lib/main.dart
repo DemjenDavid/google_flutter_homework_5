@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:homework_5/data/get_images.dart';
 import 'package:homework_5/src/model/image.dart' as cstm;
 import 'package:http/http.dart';
-
-import 'data/get_images.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       routes: <String, WidgetBuilder>{
-        "/imageDetail": (BuildContext context) {
+        '/imageDetail': (BuildContext context) {
           return const DetailPage();
         }
       },
@@ -47,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     final Client c = Client();
     final ImageApi api = ImageApi(c);
-    List<cstm.Image> img = await api.getImages();
+    final List<cstm.Image> img = await api.getImages();
 
     if (img.isNotEmpty) {
       setState(() {
@@ -80,25 +79,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   final cstm.Image image = images[index];
                   return GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, "/imageDetail", arguments: image);
+                      Navigator.pushNamed(context, '/imageDetail', arguments: image);
                     },
                     child: Container(
                       height: MediaQuery.of(context).size.height,
                       decoration: BoxDecoration(
-                          image: DecorationImage(image: NetworkImage(image.url.regular), fit: BoxFit.cover)),
+                          image: DecorationImage(image: NetworkImage(image.url.regular), fit: BoxFit.cover),),
                     ),
                   );
-                }, childCount: images.length),
+                }, childCount: images.length,),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
                 ),
               ),
             ],
           );
         }
-      }),
+      },),
     );
   }
 }
@@ -121,11 +120,10 @@ class DetailPage extends StatelessWidget {
     final cstm.Image image = ModalRoute.of(context)!.settings.arguments! as cstm.Image;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Artist: ${image.user.name!}"),
+        title: Text('Artist: ${image.user.name!}'),
       ),
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const SizedBox(
               height: 20,
@@ -141,14 +139,14 @@ class DetailPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Date: ${image.date}",
+                  'Date: ${image.date}',
                   style: header2,
                 ),
                 const SizedBox(
                   width: 30,
                 ),
                 Text(
-                  "Likes: ${image.likes}",
+                  'Likes: ${image.likes}',
                   style: header2,
                 ),
               ],
@@ -157,34 +155,34 @@ class DetailPage extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Description: ${image.description}",
+              'Description: ${image.description}',
               style: header3,
             ),
             const SizedBox(
               height: 20,
             ),
             const Text(
-              "About the user:",
+              'About the user:',
               style: header1,
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
-              "Username: ${image.user.username}",
+              'Username: ${image.user.username}',
               style: header2,
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
-              "Instagram: ${image.user.instagramUsername}",
+              'Instagram: ${image.user.instagramUsername}',
               style: header2,
             ),
             const SizedBox(
               height: 10,
             ),
-            Text("Bio: ${image.user.bio}", style: header3),
+            Text('Bio: ${image.user.bio}', style: header3),
           ],
         ),
       ),

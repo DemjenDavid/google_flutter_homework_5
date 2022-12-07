@@ -9,11 +9,11 @@ class ImageApi {
   final Client _client;
 
   Future<List<Image>> getImages() async {
-    Response r = await _client.get(Uri.parse('https://api.unsplash.com/photos/random/?count=9'),
+    final Response r = await _client.get(Uri.parse('https://api.unsplash.com/photos/random/?count=9'),
         headers: <String, String>{
           'Authorization': 'Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg',
           'count': '9'
-        });
+        },);
 
     if (r.statusCode == 200) {
       final List<dynamic> body = jsonDecode(r.body) as List<dynamic>;

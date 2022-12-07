@@ -19,3 +19,4 @@ linter:
     use_test_throws_matchers: true
     unnecessary_lambdas: false
     no_default_cases: false
+    sort_pub_dependencies: false
