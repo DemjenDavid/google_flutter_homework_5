@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:homework_5/src/model/image.dart' as cstm;
 import 'package:http/http.dart';
+
+import 'data/get_images.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +20,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: <String, WidgetBuilder>{
+        "/imageDetail": (BuildContext context){
+          return const DetailPage();
+        }
+      },
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -32,30 +41,27 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<String> urls = <String>[];
   bool ready = false;
+  List<cstm.Image> images= <cstm.Image>[];
 
   Future<void> _update() async {
     setState(() {
       ready = false;
     });
-    Response r = await get(Uri.parse("https://api.unsplash.com/photos/random/?count=9"), headers: <String, String>{
-      "Authorization": "Client-ID XikfGv9_2XiJwmo6yu6YMGym4286SOBE0nlPSQAVssg",
-      "count": "9"
-    });
-    if (r.statusCode == 200) {
-      urls.clear();
-      List<dynamic> data = jsonDecode(r.body) as List<dynamic>;
-      for (Map<String, dynamic> item in data) {
-        urls.add(item["urls"]["regular"]);
-      }
+    final Client c = Client();
+    final ImageApi api = ImageApi(c);
+    List<cstm.Image> img = await api.getImages();
+
+    if(img.isNotEmpty){
+      setState(() {
+        images = img;
+        ready = true;
+      });
     }
-    setState(() {
-      ready = true;
-    });
+
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _update();
   }
@@ -74,12 +80,20 @@ class _MyHomePageState extends State<MyHomePage> {
             slivers: <Widget>[
               SliverGrid(
                 delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height,
-                    decoration:
-                        BoxDecoration(image: DecorationImage(image: NetworkImage(urls[index]), fit: BoxFit.cover)),
+                  final cstm.Image image = images[index];
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, "/imageDetail", arguments: image);
+                    },
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      decoration:
+                          BoxDecoration(
+                              image: DecorationImage(image: NetworkImage(image.url.regular), fit: BoxFit.cover)
+                          ),
+                    ),
                   );
-                }, childCount: urls.length),
+                }, childCount: images.length),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 8.0,
@@ -92,4 +106,30 @@ class _MyHomePageState extends State<MyHomePage> {
       }),
     );
   }
+}
+
+class DetailPage extends StatelessWidget{
+  const DetailPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final cstm.Image image = ModalRoute.of(context)!.settings.arguments! as cstm.Image;
+    return Scaffold(
+      appBar: AppBar(
+         title: Text("Artist: ${image.user.name!}"),
+      ),
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.network(image.url.regular,
+              height: MediaQuery.of(context).size.height*.5,
+            ),
+            Text("Date: ${image.date}"),
+            Text("Likes: ${image.likes}"),
+          ],
+        ),
+    );
+  }
+
 }
