@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:homework_5/src/model/image.dart';
+import 'package:homework_5/src/model/index.dart';
 import 'package:http/http.dart';
 
 class ImageApi {
