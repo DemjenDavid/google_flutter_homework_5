@@ -6,7 +6,7 @@ class AppState with _$AppState {
     @Default(<Image>[]) List<Image> images,
     @Default(true) bool isLoading,
     Image? selectedImage,
-}) = AppState$;
+  }) = AppState$;
 
   factory AppState.fromJson(Map<dynamic, dynamic> json) => _$AppStateFromJson(Map<String, dynamic>.from(json));
 }

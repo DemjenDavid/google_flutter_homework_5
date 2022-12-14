@@ -22,7 +22,7 @@ void main() {
       EpicMiddleware<cstm.AppState>(epics.epic),
     ],
   )..dispatch(const GetImages());
-  
+
   runApp(MyApp(store: store));
 }
 

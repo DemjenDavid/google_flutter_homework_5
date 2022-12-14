@@ -1,7 +1,6 @@
 import 'package:homework_5/src/actions/index.dart';
+import 'package:homework_5/src/model/index.dart';
 import 'package:redux/redux.dart';
-
-import '../model/index.dart';
 
 // state + action => state
 
@@ -12,13 +11,12 @@ Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
   TypedReducer<AppState, SetSelectedImage>(_setSelectedImage),
 ]);
 
-
 AppState _getImagesSuccessful(AppState state, GetImagesSuccessful action) {
   return state.copyWith(
     isLoading: false,
     images: <Image>[
       ...action.images,
-    ]
+    ],
   );
 }
 
